@@ -103,7 +103,7 @@ synchroniser des données ,envoyer des notifications ,effectuer des calculs quot
                 table.append("</table>");
 
                 String body = "Hi"+profile.getFullname()+" Here id you summary of your expends </br></br> "+table;
-                //sendMailService.sendMail(profile.getEmail(), "Your total summary expend for today", body);
+                sendMailService.sendMail(profile.getEmail(), "Your total summary expend for today", body);
                 System.out.println("*************************** Summary incomes for user : "+profile.getFullname()+" ****************************");
 
             }
@@ -142,7 +142,7 @@ synchroniser des données ,envoyer des notifications ,effectuer des calculs quot
                 table.append("</table>");
 
                 String body = "Hi"+profile.getFullname()+" Here id you summary of your expends </br></br> "+table;
-                //sendMailService.sendMail(profile.getEmail(), "Your total summary expend for today", body);
+                sendMailService.sendMail(profile.getEmail(), "Your total summary expend for today", body);
                 System.out.println("*************************** Summary incomes for user : "+profile.getFullname()+" ****************************");
 
             }
