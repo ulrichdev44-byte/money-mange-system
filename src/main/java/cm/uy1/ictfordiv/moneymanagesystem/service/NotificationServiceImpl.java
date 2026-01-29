@@ -43,8 +43,8 @@ il sert a :exécuter des nettoyages de base de données,générer des rapports p
 synchroniser des données ,envoyer des notifications ,effectuer des calculs quotidiens
     *
     * */
-    @Scheduled(cron = "0 * * * * *", zone = "IST")
-    //@Scheduled(cron = "0 0 10 * * *", zone = "IST") // permet de definir la frenquence d'envoi d'email par jour
+   // @Scheduled(cron = "0 * * * * *", zone = "IST")
+    @Scheduled(cron = "0 0 10 * * *", zone = "IST") // permet de definir la frenquence d'envoi d'email par jour
     public void SendDailyIncomeExpendReminder() {
 
         log.info("Job started: SendDailyIncomeExpendReminder");
@@ -59,7 +59,7 @@ synchroniser des données ,envoyer des notifications ,effectuer des calculs quot
                     "click on thi link for consult about that" +
                     "<a href="+frontendUrl+" style=''>"+profile.getFullname()+"</a>" +
                     "<br><br> Best regard money team";
-                   // sendMailService.sendMail(profile.getEmail(), "Daily remainder add and expend money",body);
+                    sendMailService.sendMail(profile.getEmail(), "Daily remainder add and expend money",body);
 
             System.out.println("********************* Mail had been sent to "+profile.getFullname()+"he can check out his email inbox ****************");
 
@@ -69,8 +69,8 @@ synchroniser des données ,envoyer des notifications ,effectuer des calculs quot
 
 
     @Override
-   // @Scheduled(cron = "0 0 23 * * *",zone = "IST")
-    @Scheduled(cron = "0 * * * * *", zone = "IST")
+    @Scheduled(cron = "0 0 23 * * *",zone = "IST")
+    //@Scheduled(cron = "0 * * * * *", zone = "IST")
     public void SendDailyExpendSummary() {
         log.info("Job Complete : SendDailyExpendSummary");
 

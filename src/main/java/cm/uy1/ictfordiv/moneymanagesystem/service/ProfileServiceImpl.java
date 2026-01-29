@@ -8,6 +8,7 @@ import cm.uy1.ictfordiv.moneymanagesystem.repository.ProfileRepository;
 import cm.uy1.ictfordiv.moneymanagesystem.util.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
@@ -36,6 +37,8 @@ public class ProfileServiceImpl implements ProfileService {
     private  final UserDetailsService userDetailsService;
     private final JwtUtil jwtUtil;
 
+    @Value("${money.manager.backend.url}")
+    private String activationURL;
     @Override
     public ProfileDTO registerProfile(ProfileDTO profileDTO) {
         profileDTO.setActivationToken(UUID.randomUUID().toString());
@@ -43,11 +46,11 @@ public class ProfileServiceImpl implements ProfileService {
         ProfileEntity newProfileEntity = profileMappers.toProfileEntity(profileDTO);
         profileRepository.save(newProfileEntity);
 
-        String activationLink = "http://localhost:8080/api/v1.0/activate?token="+newProfileEntity.getActivationToken();
+        String activationLink = activationURL+"/api/v1.0/activate?token="+newProfileEntity.getActivationToken();
         String subject = "Activate your money manager account";
         String body = "Click here to activate your money manager account"+activationLink;
 
-//        sendMailService.sendMail(newProfileEntity.getEmail(), subject, body);
+       sendMailService.sendMail(newProfileEntity.getEmail(), subject, body);
 
         return profileMappers.toProfileDTO(newProfileEntity);
     }

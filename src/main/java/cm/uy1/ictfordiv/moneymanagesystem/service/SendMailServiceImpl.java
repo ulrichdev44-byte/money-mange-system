@@ -14,7 +14,7 @@ public class SendMailServiceImpl implements SendMailService {
     @Autowired
     private final JavaMailSender mailSender;
 
-//    @Value("${spring.mail.properties.mail.smtp.from}")
+   @Value("${spring.mail.username}")
     private String fromEmail;
 
     @Override
